@@ -65,7 +65,7 @@ cat > ./create-operator.sh <<EOF
 alias go="/usr/local/go/bin/go"
 source ~/.bashrc 2>/dev/null
 VERSION=$VERSION
-figlet OPERATOR SDK $VERSION
+figlet OPERATOR SDK \$VERSION
 echo "Welcome! Time to create a new operator!"
 echo
 echo "====================================================="
@@ -78,9 +78,9 @@ echo "[A]nsible/[G]o : "
 echo "====================================================="
 read TECH
 
-if [ "$TECH" == "A" ]||[ "$TECH" == "a" ];then
+if [ "\$TECH" == "A" ]||[ "\$TECH" == "a" ];then
     FRAMEWORK="ansible"
-elif [ "$TECH" == "G" ]||[ "$TECH" == "g" ];then
+elif [ "\$TECH" == "G" ]||[ "\$TECH" == "g" ];then
     FRAMEWORK="go"
 fi
 
