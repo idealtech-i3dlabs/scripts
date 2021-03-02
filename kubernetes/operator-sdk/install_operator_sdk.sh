@@ -26,6 +26,9 @@ figlet base pkgs
 sudo apt-get install -y git mercurial bzr build-essential make python3.8 python3-pip sshfs wget curl
 sudo ln -sf /usr/bin/pip3 /usr/bin/pip
 sudo ln -sf /usr/bin/python3 /usr/bin/python
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo mv kubectl /usr/local/bin/kubectl
+sudo chmod +x /usr/local/bin/kubectl
 }
 
 function installGo() {
@@ -83,7 +86,7 @@ set +v
 echo "Your next steps..."
 figlet tutorial go
 echo https://sdk.operatorframework.io/docs/building-operators/go/tutorial
-echo "NOTE: If you need to use go, change --plugins in the script to \"go\"
+echo "NOTE: If you need to use go, change --plugins in the script to \"go\""
 echo
 figlet tutorial ansible
 echo https://sdk.operatorframework.io/docs/building-operators/ansible/tutorial
