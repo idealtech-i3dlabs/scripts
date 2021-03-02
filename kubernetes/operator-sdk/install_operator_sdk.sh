@@ -76,7 +76,7 @@ read K
 
 mkdir -p ~/kube-operators/\$K && cd ~/kube-operators/\$K
 set -v
-operator-sdk init --project-version=2 --plugins=ansible #--skip-go-version-check
+operator-sdk init --project-version=3 --plugins=ansible #--skip-go-version-check
 operator-sdk create api --group cache --version v1alpha1 --kind \$K --generate-role
 set +v
 
