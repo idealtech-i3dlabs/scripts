@@ -20,12 +20,13 @@ fi
 }
 # BASE
 
+function installBase() {
 sudo apt-get install -y figlet
 figlet base pkgs
 sudo apt-get install -y git mercurial bzr build-essential make python3.8 python3-pip sshfs wget curl
-
 sudo ln -sf /usr/bin/pip3 /usr/bin/pip
 sudo ln -sf /usr/bin/python3 /usr/bin/python
+}
 
 function installGo() {
 figlet go - install
@@ -65,7 +66,7 @@ cat > ./create-operator.sh <<EOF
 alias go="/usr/local/go/bin/go"
 source ~/.bashrc 2>/dev/null
 VERSION=$VERSION
-figlet OPERATOR SDK \$VERSION
+figlet OPERATOR SDK $VERSION
 echo "Welcome! Time to create a new operator!"
 echo
 echo "====================================================="
@@ -96,7 +97,7 @@ figlet running
 echo operator-sdk run bundle \$BUNDLE_IMG
 
 figlet uninstall operator
-echo operator-sdk cleanup \$OP
+echo operator-sdk cleanup $OP
 
 EOF
 
@@ -110,6 +111,7 @@ echo "./create-operator.sh"
 
 if [ -z $1 ];then
     checkUser
+    installBase
     installGo
     installOperatorSDK
     installDeps
@@ -117,17 +119,16 @@ if [ -z $1 ];then
 elif [ "$1" == "installgo" ];then
     installGo
 elif [ "$1" == "installoperatorsdk" ];then
-    installGo
+    installOperatorSDK
 elif [ "$1" == "installdeps" ];then
-    installGo
+    installDeps
 elif [ "$1" == "prepoperatorscript" ];then
-    installGo
+    prepOperatorScript
 fi
 
-figlet modules
-
-echo "Did you know I am modular? Next time, your options are:"
-echo "<scriptname> installgo / installoperatorsdk / installdeps / prepoperatorscript"
+figlet my features
+echo "IDEMPOTENT,MODULAR,NOERRORALLOWED"
+echo "...next time..."
+echo "$(basename "$0") installgo / installoperatorsdk / installdeps / prepoperatorscript"
 
 figlet success
-
