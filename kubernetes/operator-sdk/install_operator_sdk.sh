@@ -1,7 +1,7 @@
 #!/bin/bash
 ## Operator SDK installer
-## AUTHOR: Martin Levasseur (martin@i3dlabs.com)
-## Purpose: Simplify installation of 
+## AUTHOR: MPL (mpl@i3dlabs.com)
+## Purpose: Simplify installation of operator-sdk from source
 ## Assumes: Ubuntu 20.04 minimal, contents will end up in ~/kube-operators
 ## License: CC Attribution 4.0 International (CC BY 4.0)
 set -e
@@ -74,28 +74,23 @@ echo "Kind? (MUST START WITH AN UPPERCASE!) : "
 echo "====================================================="
 read K
 
-echo "====================================================="
-echo "[A]nsible/[G]o : "
-echo "====================================================="
-read TECH
-
-if [ "\$TECH" == "A" ]||[ "\$TECH" == "a" ];then
-    FRAMEWORK="ansible"
-elif [ "\$TECH" == "G" ]||[ "\$TECH" == "g" ];then
-    FRAMEWORK="go"
-fi
-
 mkdir -p ~/kube-operators/\$K && cd ~/kube-operators/\$K
-operator-sdk init --project-version=2 --plugins=\$FRAMEWORK #--skip-go-version-check
+set -v
+operator-sdk init --project-version=2 --plugins=ansible #--skip-go-version-check
 operator-sdk create api --group cache --version v1alpha1 --kind \$K --generate-role
+set +v
 
 echo "Your next steps..."
-figlet tutorial
+figlet tutorial go
+echo https://sdk.operatorframework.io/docs/building-operators/go/tutorial
+echo "NOTE: If you need to use go, change --plugins in the script to \"go\"
+echo
+figlet tutorial ansible
 echo https://sdk.operatorframework.io/docs/building-operators/ansible/tutorial
-
+echo
 figlet running
 echo operator-sdk run bundle \$BUNDLE_IMG
-
+echo
 figlet uninstall operator
 echo operator-sdk cleanup $OP
 
