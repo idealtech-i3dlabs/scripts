@@ -32,7 +32,7 @@ function installGo() {
 figlet go - install
 echo "Downloading $GOPKG from the internet *now*"
 cd && mkdir -p pkgs && cd pkgs
-[ ! -f ~/pkgs/$GOPKG ] && wget https://golang.org/dl/$GOPKG && sudo tar -C /usr/local -xzf $GOPKG
+[ ! -f ~/pkgs/$GOPKG ] && wget https://golang.org/dl/$GOPKG && sudo tar -C /usr/local -xzf $GOPKG || /bin/true
 }
 
 installOperatorSDK() {
@@ -44,7 +44,7 @@ source ~/.bashrc 2>/dev/null
 source ~/.zshrc 2>/dev/null
 go version
 cd
-git clone https://github.com/operator-framework/operator-sdk &&
+[ ! -f ~/operator-sdk ] && git clone https://github.com/operator-framework/operator-sdk || /bin/true &&
 cd operator-sdk &&
 git checkout master &&
 make install &&
