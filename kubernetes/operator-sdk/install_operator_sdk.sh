@@ -43,6 +43,8 @@ echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc
 echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.zshrc
 echo "export GOPROXY=\"https://proxy.golang.org|direct\"" >> ~/.bashrc
 echo "export GOPROXY=\"https://proxy.golang.org|direct\"" >> ~/.zshrc
+echo "alias k=\"kubectl\"" >> ~/.bashrc
+echo "alias k=\"kubectl\"" >> ~/.zshrc
 source ~/.bashrc 2>/dev/null
 source ~/.zshrc 2>/dev/null
 go version
